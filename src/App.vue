@@ -7,7 +7,7 @@
 <style lang="scss">
 @import url(./style/reset.scss);
 .content_box {
-  width: 10rem;
+  width: 375px;
   margin: 0 auto;
 }
 </style>

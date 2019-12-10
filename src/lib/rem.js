@@ -17,7 +17,6 @@
     function setRemUnit () {
         var rem = docEl.clientWidth / 10
         if (navigator.userAgent.match(/[^(Android|iPhone|iPad)]/i)) {
-            console.log('pc', navigator.userAgent)
             rem = docEl.clientWidth > maxWidth ? maxWidth / 10 : docEl.clientWidth / 10
         }
         docEl.style.fontSize = rem + 'px'
