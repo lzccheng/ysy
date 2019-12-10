@@ -1,22 +1,64 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import headContentTabs from '@/layout/headContentTabs'
+import MovieModel from './modules/movie'
 
 Vue.use(VueRouter)
 
-const routes = [
+const firstChild = (title, path, name) => [
   {
-    path: '/',
-    name: 'home',
-    component: Home
+    path: '',
+    redirect: 'index'
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: 'index',
+    component: () => path,
+    name,
+    meta: {
+      title,
+      noback: true,
+      tabs: true
+    }
+  }
+]
+
+const routes = [
+  {
+    path: '',
+    redirect: '/home'
+  },
+  {
+    path: '/home',
+    component: headContentTabs,
+    children: [
+      ...firstChild('首页', import('@/views/Home'), 'home')
+    ]
+  },
+  {
+    path: '/movie',
+    component: headContentTabs,
+    children: [
+      ...firstChild('电影', import('@/views/movie'), 'movie'),
+      ...MovieModel
+    ]
+  },
+  {
+    path: '/pic',
+    component: headContentTabs,
+    children: [
+      ...firstChild('图片', import('@/views/pic'), 'pic')
+    ]
+  },
+  {
+    path: '/navel',
+    component: headContentTabs,
+    children: [
+      ...firstChild('小说', import('@/views/navel'), 'navel')
+    ]
+  },
+  {
+    path: '*',
+    component: () => import('@/views/page404')
   }
 ]
 

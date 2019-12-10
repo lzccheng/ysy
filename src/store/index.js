@@ -5,8 +5,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    ajaxLoading: false
   },
   mutations: {
+    SET_AJAXLOADING (state, data) {
+      state.ajaxLoading = data
+    }
   },
   actions: {
   },

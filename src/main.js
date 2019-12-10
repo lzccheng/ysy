@@ -6,6 +6,9 @@ import store from './store'
 // 适配
 import './lib/rem'
 
+// globComponents
+import './globComponents'
+
 Vue.config.productionTip = false
 
 new Vue({
