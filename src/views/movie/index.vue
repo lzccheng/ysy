@@ -3,8 +3,8 @@
         <TabsUpload @load="handleLoad" :finished="finished" @click="handleTabs">
             <van-tab :title="item.name" v-for="(item, i) in tabs" :key="i">
                 <div v-for="(_item, _i) in item.list" :key="_i" @click="handleGo(_item)" class="item">
-                    <img :src="_item.cover" alt="" class="img">
-                    <p>{{_item.title}}</p>
+                    <img alt="" class="img" v-lazy="_item.cover">
+                    <p class="title">{{_item.title}}</p>
                 </div>
             </van-tab>
         </TabsUpload>
@@ -66,9 +66,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 .list {
-    padding: 0 10px;
-    .item {
-        margin: 10px 0;
+    .title {
+        margin: 10px 6px;
+        line-height: 22px;
     }
 }
 .img {
