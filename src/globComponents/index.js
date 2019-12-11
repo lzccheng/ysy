@@ -1,6 +1,11 @@
 import Vue from 'vue'
 
-import { NavBar, Loading, Tabbar, TabbarItem, List, Tab, Tabs } from 'vant'
+import UpLoading from '_c/UpLoading'
+import MTabs from '_c/Tabs'
+import TabsUpload from '_c/TabsUpload'
+import FixedBg from '_c/FixedBg'
+
+import { NavBar, Loading, Tabbar, TabbarItem, List, Tab, Tabs, Button, Sticky } from 'vant'
 Vue.use(NavBar)
    .use(Loading)
    .use(Tabbar)
@@ -8,3 +13,10 @@ Vue.use(NavBar)
    .use(List)
    .use(Tab)
    .use(Tabs)
+   .use(Button)
+   .use(Sticky)
+
+Vue.component('UpLoading', UpLoading)
+Vue.component('MTabs', MTabs)
+Vue.component('TabsUpload', TabsUpload)
+Vue.component('FixedBg', FixedBg)

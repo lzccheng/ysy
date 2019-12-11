@@ -23,7 +23,7 @@ module.exports = {
             .set('@', resolve('src'))
             .set('api', resolve('src/api'))
             .set('_l', resolve('src/lib'))
-            .set('_C', resolve('src/components'))
+            .set('_c', resolve('src/components'))
             .set('_m', resolve('src/mixin'))
     }
 }
