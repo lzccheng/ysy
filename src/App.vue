@@ -1,6 +1,8 @@
 <template>
   <div>
-    <router-view/>
+    <keep-alive>
+      <router-view/>
+    </keep-alive>
     <GlobleLoading />
   </div>
 </template>
@@ -14,7 +16,6 @@ export default {
 </script>
 <style lang="scss">
 @import '@/style/reset.scss';
-
 .fixed_center {
     max-width: 375px;
     left: 50% !important;
