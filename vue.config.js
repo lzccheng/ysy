@@ -3,6 +3,7 @@ const path = require('path')
 const resolve = str => path.resolve(__dirname, str)
 
 module.exports = {
+    productionSourceMap: false,
     publicPath: process.env.NODE_ENV === 'production' ? '/ysy' : '/',
     outputDir: 'docs',
     css: {
