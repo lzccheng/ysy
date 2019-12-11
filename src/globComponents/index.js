@@ -5,7 +5,7 @@ import MTabs from '_c/Tabs'
 import TabsUpload from '_c/TabsUpload'
 import FixedBg from '_c/FixedBg'
 
-import { NavBar, Loading, Tabbar, TabbarItem, List, Tab, Tabs, Button, Sticky, Lazyload } from 'vant'
+import { NavBar, Loading, Tabbar, TabbarItem, List, Tab, Tabs, Button, Sticky, Lazyload, Icon } from 'vant'
 Vue.use(NavBar)
    .use(Loading)
    .use(Tabbar)
@@ -16,6 +16,7 @@ Vue.use(NavBar)
    .use(Button)
    .use(Sticky)
    .use(Lazyload)
+   .use(Icon)
 
 Vue.component('UpLoading', UpLoading)
 Vue.component('MTabs', MTabs)
