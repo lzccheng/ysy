@@ -1,6 +1,6 @@
 <template>
     <transition name="van-slide-up">
-        <div class="fixed_box" v-show="show" @click.self="handleSelf">
+        <div class="fixed_box" v-if="show" @click.self="handleSelf">
             <van-sticky>
                 <div class="btn">
                     <van-button plain type="primary" @click="handleSelf" block>关闭</van-button>

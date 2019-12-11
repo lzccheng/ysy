@@ -8,7 +8,7 @@
                 </div>
             </van-tab>
         </TabsUpload>
-        <FixedBg :show="bgShow" @close="bgShow = false">
+        <FixedBg :show="bgShow" @close="handleClose">
             <div>
                 <div v-for="item in imgList" :key="item" @click="handleView">
                     <img v-lazy="item" :width="imgW" alt="">
@@ -45,11 +45,14 @@ export default {
         }
     },
     methods: {
+        handleClose () {
+            this.bgShow = false
+            this.imgList = []
+        },
         handleView () {
             ImagePreview(this.imgList)
         },
         async handleGo (item) {
-            this.imgList = []
             const { id } = item
             const { data: { content } } = await getPicAlone({ id }, true)
             this.imgList = JSON.parse(content)
