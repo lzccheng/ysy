@@ -49,6 +49,7 @@ export default {
             ImagePreview(this.imgList)
         },
         async handleGo (item) {
+            this.imgList = []
             const { id } = item
             const { data: { content } } = await getPicAlone({ id }, true)
             this.imgList = JSON.parse(content)
