@@ -10,7 +10,7 @@
         </TabsUpload>
         <FixedBg :show="bgShow" @close="handleClose">
             <div>
-                <div v-for="item in imgList" :key="item" @click="handleView">
+                <div v-for="item in imgList" :key="item" @click="bgShow = false">
                     <img v-lazy="item" :width="imgW" alt="">
                 </div>
             </div>
@@ -45,10 +45,6 @@ export default {
         }
     },
     methods: {
-        handleClose () {
-            this.bgShow = false
-            this.imgList = []
-        },
         handleView () {
             ImagePreview(this.imgList)
         },
