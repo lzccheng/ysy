@@ -8,9 +8,9 @@
                 </div>
             </van-tab>
         </TabsUpload>
-        <FixedBg :show="bgShow" @close="handleClose">
+        <FixedBg :show="bgShow" @close="bgShow = false">
             <div>
-                <div v-for="item in imgList" :key="item" @click="bgShow = false">
+                <div v-for="item in imgList" :key="item" @click="handleView">
                     <img v-lazy="item" :width="imgW" alt="">
                 </div>
             </div>
