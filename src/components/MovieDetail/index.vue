@@ -29,7 +29,6 @@ export default {
         init () {
             const detail = this.data
             this.detail = detail
-            console.log(detail)
             this.$nextTick(() => {
                 const options = {
                     controls: true,
@@ -38,6 +37,15 @@ export default {
                 this.player = videojs('id_video', options, () => {
                     this.player.src({
                         src: detail.playurl
+                    })
+                    this.player.on('play', () => {
+                        const isFullscreen = this.player.isFullscreen()
+                        if (!isFullscreen) {
+                            this.player.requestFullscreen()
+                        }
+                    })
+                    this.player.on('ended', () => {
+                        this.player.exitFullScreen()
                     })
                 })
             })
@@ -54,7 +62,7 @@ export default {
 <style lang="scss" scoped>
 .video-js {
     width: 100% !important;
-    height: 300px !important;
+    height: 400px !important;
 }
 .title {
     margin: 10px 6px;
