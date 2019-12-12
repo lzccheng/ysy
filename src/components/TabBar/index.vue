@@ -1,6 +1,6 @@
 <template>
     <van-tabbar v-model="active" fixed class="fixed_center">
-        <van-tabbar-item :icon="item.icon" :name="item.activeName" v-for="item in barList" :to="item.to" :key="item.icon">{{item.name}}</van-tabbar-item>
+        <van-tabbar-item :icon="item.icon" :name="item.activeName" v-for="(item, i) in barList" :to="item.to" :key="i">{{item.name}}</van-tabbar-item>
     </van-tabbar>
 </template>
 
@@ -33,6 +33,12 @@ export default {
                     name: '小说',
                     activeName: 'navel',
                     to: '/navel'
+                },
+                {
+                    icon: 'orders-o',
+                    name: '精品',
+                    activeName: 'good',
+                    to: '/good'
                 }
             ]
         }

@@ -6,10 +6,7 @@
                     <p class="navel_title">《{{_item.title}}》</p>
                     <p class="time">
                         <span>{{_item.createtime}}</span>
-                        <span>
-                            <van-icon name="eye-o" class="eye_icon"/>
-                            {{_item.reads}}
-                        </span>
+                        <EyeLook :look="_item.reads"/>
                     </p>
                     <div class="navel_introduction" v-html="_item.introduction"></div>
                 </div>
@@ -29,6 +26,7 @@
 import { getNavel, getNavelAlone } from 'api'
 import uploading from '_m/uploading'
 import tabs from '_m/tabs'
+import { mapMutations, mapState } from 'vuex'
 export default {
     mixins: [uploading, tabs],
     data () {
@@ -54,7 +52,6 @@ export default {
         async handleGo (item) {
             const { id } = item
             const { data } = await getNavelAlone({ id }, true)
-            console.log(data)
             this.navel = data
             this.bgShow = true
         },
@@ -64,11 +61,21 @@ export default {
             await this.comGetData(getNavel)
         },
         init () {
-            this.getData()
-        }
+            if (this.page_status) this.tabs = this.page_status
+            // this.getData()
+        },
+        ...mapMutations(['SET_NAVEL_DATA'])
     },
     created () {
         this.init()
+    },
+    computed: {
+        ...mapState({
+            page_status: state => state.pageStatus.navel_page
+        })
+    },
+    destroyed () {
+        this.SET_NAVEL_DATA(this.tabs)
     }
 }
 </script>
@@ -92,11 +99,6 @@ export default {
         color: #888;
         font-size: 16px;
         padding: 4px 8px 8px;
-    }
-    .eye_icon {
-        margin-left: 18px;
-        position: relative;
-        top: 2px;
     }
 }
 

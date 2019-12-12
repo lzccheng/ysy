@@ -6,15 +6,20 @@
         </div>
         <p class="title">
             <span>{{detail.title}}</span><br />
-            <span class="time">{{detail.updatetime}}</span>
+            <span class="time">{{detail.updatetime}}<EyeLook :look="detail.reads"/></span>
         </p>
     </div>
 </template>
 <script>
-import { ssGet } from '_l/cache'
 import videojs from 'video.js'
 import 'video.js/dist/video-js.css'
 export default {
+    props: {
+        data: {
+            type: Object,
+            required: true
+        }
+    },
     data () {
         return {
             detail: null
@@ -22,7 +27,7 @@ export default {
     },
     methods: {
         init () {
-            const detail = ssGet('movie_detail')
+            const detail = this.data
             this.detail = detail
             console.log(detail)
             this.$nextTick(() => {

@@ -10,3 +10,7 @@ export const getPicAlone = (data, needLoading) => POST('v1/api/apiGetPhotoData',
 export const getNavel = (data, needLoading) => POST('v1/api/apiFetchNovelData', { data }, { needLoading })
 // 小说详情
 export const getNavelAlone = (data, needLoading) => POST('v1/api/apiGetNovelData', { data }, { needLoading })
+// 精品列表
+export const getGood = (data, needLoading) => POST('v1/api/apiFetchPremiumContentData', { data }, { needLoading })
+// 精品图片详情
+export const getGoodPic = (data, needLoading) => POST('v1/api/apiGetPremiumContentData', { data }, { needLoading })

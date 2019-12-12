@@ -57,6 +57,13 @@ const routes = [
     ]
   },
   {
+    path: '/good',
+    component: headContentTabs,
+    children: [
+      ...firstChild('精品', import('@/views/good'), 'good')
+    ]
+  },
+  {
     path: '*',
     component: () => import('@/views/page404')
   }

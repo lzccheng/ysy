@@ -3,7 +3,7 @@
         <TabsUpload @load="handleLoad" @click="handleTabs" :finished="finished">
             <van-tab :title="item.name" v-for="(item, i) in tabs" :key="i">
                 <div v-for="(_item, _i) in item.list" :key="_i" @click="handleGo(_item)" class="item">
-                    <img v-lazy="_item.cover" :width="imgW"/>
+                    <MImage :src="_item.cover" />
                     <p class="pic_title van-ellipsis">{{_item.title}}</p>
                 </div>
             </van-tab>
@@ -11,7 +11,7 @@
         <FixedBg :show="bgShow" @close="bgShow = false">
             <div>
                 <div v-for="item in imgList" :key="item" @click="handleView">
-                    <img v-lazy="item" :width="imgW" alt="">
+                    <MImage :src="item" />
                 </div>
             </div>
         </FixedBg>
@@ -22,21 +22,21 @@ import { getPic, getPicAlone } from 'api'
 import uploading from '_m/uploading'
 import tabs from '_m/tabs'
 import { ImagePreview } from 'vant'
+import { mapMutations, mapState } from 'vuex'
 export default {
     mixins: [uploading, tabs],
     data () {
         return {
-            imgW: '100%',
             params: {
                 pagesize: 20
             },
             tabs: [
                 {
-                    name: '色情漫画',
+                    name: '漫画',
                     classify: 1
                 },
                 {
-                    name: '美女写真',
+                    name: '美女',
                     classify: 2
                 }
             ],
@@ -58,7 +58,22 @@ export default {
             const { classify } = this.tabs[this.currentTab]
             this.params.classify = classify
             await this.comGetData(getPic)
-        }
+        },
+        init () {
+            if (this.page_status) this.tabs = this.page_status
+        },
+        ...mapMutations(['SET_PIC_DATA'])
+    },
+    computed: {
+        ...mapState({
+            page_status: state => state.pageStatus.pic_page
+        })
+    },
+    created () {
+        this.init()
+    },
+    destroyed () {
+        this.SET_PIC_DATA(this.tabs)
     }
 }
 </script>

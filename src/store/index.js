@@ -3,18 +3,17 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-// const modulesFiles = require.context('./module', false, /\.js$/)
-// const modules = modulesFiles.keys().reduce((modules, modulePath) => {
-//   console.log('modules, modulePath', modules, modulePath)
-//   const moduleName = modulePath.replace(/^\.\/(.*)\.\w+$/, '$1')
-//   const value = modulesFiles(modulePath)
-//   console.log('value:', value, moduleName)
-//   modules[moduleName] = value.default
-//   return modules
-// }, {})
-// console.log('modulesFiles:', modulesFiles.keys(), modules)
+// 自动导入模块
+const modulesFiles = require.context('./modules', false, /\.js$/)
+const modules = modulesFiles.keys().reduce((modules, modulePath) => {
+    const moduleName = modulePath.replace(/^\.\/(.*)\.\w+$/, '$1')
+    const value = modulesFiles(modulePath)
+    modules[moduleName] = value.default
+    return modules
+}, {})
 
 export default new Vuex.Store({
+  modules,
   state: {
     ajaxLoading: false
   },
@@ -24,7 +23,5 @@ export default new Vuex.Store({
     }
   },
   actions: {
-  },
-  modules: {
   }
 })

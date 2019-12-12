@@ -3,20 +3,29 @@
         <TabsUpload @load="handleLoad" :finished="finished" @click="handleTabs">
             <van-tab :title="item.name" v-for="(item, i) in tabs" :key="i">
                 <div v-for="(_item, _i) in item.list" :key="_i" @click="handleGo(_item)" class="item">
-                    <img alt="" class="img" v-lazy="_item.cover">
+                    <MImage :src="_item.cover" />
                     <p class="title">{{_item.title}}</p>
                 </div>
             </van-tab>
         </TabsUpload>
+        <FixedBg :show="bgShow" @close="bgShow = false">
+            <div class="movie_detail">
+                <movieDetail :data="currentMovie"/>
+            </div>
+        </FixedBg>
     </div>
 </template>
 <script>
 import { getMovie } from 'api'
-import { ssSet } from '_l/cache'
 import uploading from '_m/uploading'
 import tabs from '_m/tabs'
+import movieDetail from '_c/MovieDetail'
+import { mapMutations, mapState } from 'vuex'
 export default {
     mixins: [uploading, tabs],
+    components: {
+        movieDetail
+    },
     data () {
         return {
             params: {
@@ -25,30 +34,30 @@ export default {
             },
             tabs: [
                 {
-                    name: '国产精品',
+                    name: '国产',
                     classifyid: 1
                 },
                 {
-                    name: '日韩情色',
+                    name: '日韩',
                     classifyid: 2
                 },
                 {
-                    name: '欧美性爱',
+                    name: '欧美',
                     classifyid: 3
                 },
                 {
-                    name: '动漫理伦',
+                    name: '动漫',
                     classifyid: 4
                 }
-            ]
+            ],
+            bgShow: false,
+            currentMovie: {}
         }
     },
     methods: {
         handleGo (item) {
-            ssSet('movie_detail', item)
-            this.$router.push({
-                path: `movieDetail`
-            })
+            this.currentMovie = item
+            this.bgShow = true
         },
         async getData () {
             const { classifyid } = this.tabs[this.currentTab]
@@ -56,11 +65,21 @@ export default {
             await this.comGetData(getMovie)
         },
         init () {
-            this.getData()
-        }
+            if (this.page_status) this.tabs = this.page_status
+            // this.getData()
+        },
+        ...mapMutations(['SET_MOVIE_DATA'])
     },
     created () {
-        // this.init()
+        this.init()
+    },
+    destroyed () {
+        this.SET_MOVIE_DATA(this.tabs)
+    },
+    computed: {
+        ...mapState({
+            page_status: state => state.pageStatus.movie_page
+        })
     }
 }
 </script>
@@ -71,8 +90,8 @@ export default {
         line-height: 22px;
     }
 }
-.img {
-    width: 30px;
-    border-radius: 5px;
+.movie_detail {
+    background-color: #fff;
+    padding: 20px 0;
 }
 </style>
