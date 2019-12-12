@@ -4,7 +4,13 @@
             <van-tab :title="item.name" v-for="(item, i) in tabs" :key="i">
                 <div v-for="(_item, _i) in item.list" :key="_i" @click="handleGo(_item)" class="item">
                     <MImage :src="_item.cover" />
-                    <p class="title">{{_item.title}}</p>
+                    <p class="title van-ellipsis">
+                        {{_item.title}}
+                    </p>
+                    <p class="title">
+                        {{_item.createtime}}
+                        <EyeLook :look="_item.reads"/>
+                    </p>
                 </div>
             </van-tab>
         </TabsUpload>
