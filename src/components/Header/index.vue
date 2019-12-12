@@ -1,6 +1,7 @@
 <template>
     <div class="header">
         <van-nav-bar
+            id="nav_header"
             class="fixed_center"
             :title="title"
             left-text=""
@@ -14,6 +15,7 @@
     </div>
 </template>
 <script>
+import { mapMutations, mapState } from 'vuex'
 export default {
     props: {
         title: {
@@ -34,7 +36,26 @@ export default {
             this.$router.back()
         },
         onClickRight () {
-        }
+        },
+        init () {
+            this.$nextTick(() => {
+                if (this.header_h) return
+                const dom = document.querySelector('#nav_header')
+                if (dom) {
+                    const top = dom.clientHeight
+                    if (top) this.SET_HEADER_HEIGHT(top)
+                }
+            })
+        },
+        ...mapMutations(['SET_HEADER_HEIGHT'])
+    },
+    computed: {
+        ...mapState({
+            header_h: state => state.header_heigh
+        })
+    },
+    created () {
+        this.init()
     }
 }
 </script>

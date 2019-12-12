@@ -1,11 +1,12 @@
 <template>
     <UpLoading @load="handleLoad" :finished="finished_">
-        <MTabs @click="handleTabs">
+        <MTabs @click="handleTabs" :top="navH || 48">
             <slot />
         </MTabs>
     </UpLoading>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
     props: {
         finished: {
@@ -28,6 +29,11 @@ export default {
         init () {
             this.finished_ = this.finished
         }
+    },
+    computed: {
+        ...mapState({
+            navH: state => state.header_heigh
+        })
     },
     created () {
         this.init()

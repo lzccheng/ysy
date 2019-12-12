@@ -22,7 +22,7 @@ export default {
             }
             this.params.page = page || 1
             const { data: { list: DList, total } } = await request(this.params)
-            currentTab.list = list && list.length ? list.concat(DList) : DList || []
+            currentTab.list = Object.freeze(list && list.length ? list.concat(DList) : DList || [])
             this.params.page++
             currentTab.page = this.params.page
             if (currentTab.list.length === total) { currentTab.finished = true }

@@ -1,11 +1,15 @@
 <template>
-    <van-tabs v-model="active_" @click="handleClick" swipeable title-active-color="#23f357" animated :offset-top="48" sticky color="#23f357">
+    <van-tabs v-model="active_" @click="handleClick" swipeable title-active-color="#23f357" animated :offset-top="top" sticky color="#23f357">
         <slot />
     </van-tabs>
 </template>
 <script>
 export default {
     props: {
+        top: {
+            type: Number,
+            default: 48
+        },
         active: {
             type: Number,
             default: 0

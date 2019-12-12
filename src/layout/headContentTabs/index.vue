@@ -1,7 +1,7 @@
 <template>
     <div>
         <Header :title="title" :noback="noback" />
-        <div class="content_box" :class="{marBottom: tabs}">
+        <div class="content_box" :class="{ marBottom: tabs }" :style="{ marginTop: navH + 'px' }">
             <router-view />
         </div>
         <TabBar v-show="tabs"/>
@@ -10,6 +10,7 @@
 <script>
 import Header from '@/components/Header'
 import TabBar from '@/components/TabBar'
+import { mapState } from 'vuex'
 export default {
     components: {
         Header,
@@ -21,6 +22,7 @@ export default {
     },
     computed: {
         title () {
+            console.log('navH', this.navH, this.$store.state)
             return this.$route.meta.title
         },
         noback () {
@@ -28,7 +30,13 @@ export default {
         },
         tabs () {
             return !!this.$route.meta.tabs
-        }
+        },
+        ...mapState({
+            navH: state => {
+                console.log('state', state, state.header_heigh)
+                return state.header_heigh
+            }
+        })
     }
 }
 </script>
@@ -38,6 +46,6 @@ export default {
   margin: 50px auto 0;
 }
 .marBottom {
-    margin: 50px auto 60px;
+    margin-bottom: 60px;
 }
 </style>

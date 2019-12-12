@@ -20,6 +20,9 @@ export default new Vuex.Store({
   mutations: {
     SET_AJAXLOADING (state, data) {
       state.ajaxLoading = data
+    },
+    SET_HEADER_HEIGHT (state, data) {
+      state.header_heigh = data
     }
   },
   actions: {
