@@ -1,6 +1,6 @@
 <template>
     <div>
-        <TabsUpload @load="handleLoad" @click="handleTabs" :finished="finished">
+        <TabsUpload @load="handleLoad" @change="handleTabs" :finished="finished">
             <van-tab :title="item.name" v-for="(item, i) in tabs" :key="i">
                 <div v-for="(_item, _i) in item.list" :key="_i" @click="handleGo(_item)" class="item">
                     <p class="navel_title">《{{_item.title}}》</p>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <TabsUpload @load="handleLoad" @click="handleTabs" :finished="finished">
+        <TabsUpload @load="handleLoad" @change="handleTabs" :finished="finished">
             <van-tab :title="item.name" v-for="(item, i) in tabs" :key="i">
                 <div v-for="(_item, _i) in item.list" :key="_i" @click="handleGo(_item)" class="item">
                     <MImage :src="_item.cover" />
@@ -13,8 +13,8 @@
                 <movieDetail :data="currentMovie"/>
             </div>
             <div v-if="currentTab === 1" class="imglist">
-                <div v-for="i in imgList" :key="i">
-                    <MImage :src="i" @click="handleView" />
+                <div v-for="(i, index) in imgList" :key="i">
+                    <MImage :src="i" @click="handleView(index)" />
                 </div>
             </div>
         </FixedBg>
@@ -54,8 +54,11 @@ export default {
         }
     },
     methods: {
-        handleView () {
-            ImagePreview(this.imgList)
+        handleView (startPosition) {
+            ImagePreview({
+                images: this.imgList,
+                startPosition
+            })
         },
         async handleGo (item) {
             const i = this.currentTab

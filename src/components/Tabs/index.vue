@@ -1,5 +1,5 @@
 <template>
-    <van-tabs v-model="active_" @click="handleClick" swipeable title-active-color="#23f357" animated :offset-top="top" sticky color="#23f357">
+    <van-tabs v-model="active_" @click="handleClick" @change="handleChange" swipeable title-active-color="#23f357" animated :offset-top="top" sticky color="#23f357">
         <slot />
     </van-tabs>
 </template>
@@ -23,6 +23,9 @@ export default {
     methods: {
         handleClick (i) {
             this.$emit('click', i)
+        },
+        handleChange (i) {
+            this.$emit('change', i)
         },
         init () {
             this.active_ = this.active

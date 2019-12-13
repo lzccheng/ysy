@@ -1,6 +1,6 @@
 <template>
     <div>
-        <TabsUpload @load="handleLoad" :finished="finished" @click="handleTabs">
+        <TabsUpload @load="handleLoad" :finished="finished" @change="handleTabs">
             <van-tab :title="item.name" v-for="(item, i) in tabs" :key="i">
                 <div v-for="(_item, _i) in item.list" :key="_i" @click="handleGo(_item)" class="item">
                     <MImage :src="_item.cover" />

@@ -1,6 +1,6 @@
 <template>
     <UpLoading @load="handleLoad" :finished="finished_">
-        <MTabs @click="handleTabs" :top="navH">
+        <MTabs @click="handleTabs" @change="handleChange" :top="navH">
             <slot />
         </MTabs>
     </UpLoading>
@@ -22,6 +22,9 @@ export default {
     methods: {
         handleLoad (that) {
             this.$emit('load', that)
+        },
+        handleChange (i) {
+            this.$emit('change', i)
         },
         handleTabs (i) {
             this.$emit('click', i)

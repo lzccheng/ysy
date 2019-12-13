@@ -16,7 +16,7 @@ instance.interceptors.response.use(res => {
     Toast(data.message)
     return Promise.reject(data)
 }, err => {
-    Toast(err.message)
+    Toast('网络出错')
     return err
 })
 
