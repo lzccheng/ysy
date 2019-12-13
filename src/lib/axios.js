@@ -1,10 +1,11 @@
 import axios from 'axios'
 import store from '@/store'
+import { Toast } from 'vant'
 const { commit } = store
 
 const instance = axios.create({
     baseURL: `https://saohu19.com/`,
-    timeout: 3000
+    timeout: 5000
 })
 
 instance.interceptors.response.use(res => {
@@ -12,7 +13,10 @@ instance.interceptors.response.use(res => {
     if (status === 200) {
         return data
     }
+    Toast(data.message)
+    return Promise.reject(data)
 }, err => {
+    Toast(err.message)
     return err
 })
 

@@ -19,7 +19,8 @@ import {
    Sticky,
    Lazyload,
    Icon,
-   Image
+   Image,
+   Toast
 } from 'vant'
 Vue.use(NavBar)
    .use(Loading)
@@ -33,6 +34,7 @@ Vue.use(NavBar)
    .use(Lazyload)
    .use(Icon)
    .use(Image)
+   .use(Toast)
 
 Vue.component('UpLoading', UpLoading)
 Vue.component('MTabs', MTabs)
