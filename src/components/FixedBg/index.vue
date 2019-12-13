@@ -1,18 +1,25 @@
 <template>
     <transition name="van-slide-up">
         <div class="fixed_box" v-if="show" @click.self="handleSelf">
-            <van-sticky>
+            <van-sticky v-if="closeType === 'top'">
                 <div class="btn">
                     <van-button plain type="primary" @click="handleSelf" block>关闭</van-button>
                 </div>
             </van-sticky>
             <slot />
+            <div class="btn" v-if="closeType === 'bottom'">
+                <van-button plain type="primary" @click="handleSelf" block>关闭</van-button>
+            </div>
         </div>
     </transition>
 </template>
 <script>
 export default {
     props: {
+        closeType: {
+            type: String,
+            default: 'top'
+        },
         show: {
             type: Boolean,
             default: true

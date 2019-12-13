@@ -5,7 +5,7 @@ import MovieModel from './modules/movie'
 
 Vue.use(VueRouter)
 
-const firstChild = (title, path, name) => [
+const firstChild = (title, path, name, keepAlive = true) => [
   {
     path: '',
     redirect: 'index'
@@ -17,7 +17,8 @@ const firstChild = (title, path, name) => [
     meta: {
       title,
       noback: true,
-      tabs: true
+      tabs: true,
+      keepAlive
     }
   }
 ]

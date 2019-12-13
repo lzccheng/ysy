@@ -1,6 +1,6 @@
 <template>
     <UpLoading @load="handleLoad" :finished="finished_">
-        <MTabs @click="handleTabs" :top="navH || 48">
+        <MTabs @click="handleTabs" :top="navH">
             <slot />
         </MTabs>
     </UpLoading>

@@ -2,9 +2,12 @@
     <div>
         <Header :title="title" :noback="noback" />
         <div class="content_box" :class="{ marBottom: tabs }" :style="{ marginTop: navH + 'px' }">
-            <router-view />
+            <keep-alive :max="20">
+                <router-view v-if="keepAlive" />
+            </keep-alive>
+            <router-view v-if="!keepAlive" />
         </div>
-        <TabBar v-show="tabs"/>
+        <TabBar v-if="tabs"/>
     </div>
 </template>
 <script>
@@ -22,7 +25,6 @@ export default {
     },
     computed: {
         title () {
-            console.log('navH', this.navH, this.$store.state)
             return this.$route.meta.title
         },
         noback () {
@@ -31,9 +33,11 @@ export default {
         tabs () {
             return !!this.$route.meta.tabs
         },
+        keepAlive () {
+            return this.$route.meta.keepAlive
+        },
         ...mapState({
             navH: state => {
-                console.log('state', state, state.header_heigh)
                 return state.header_heigh
             }
         })

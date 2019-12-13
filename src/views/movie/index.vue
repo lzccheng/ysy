@@ -14,7 +14,7 @@
                 </div>
             </van-tab>
         </TabsUpload>
-        <FixedBg :show="bgShow" @close="bgShow = false">
+        <FixedBg :show="bgShow" :closeType="`bottom`" @close="bgShow = false">
             <div class="movie_detail">
                 <movieDetail :data="currentMovie"/>
             </div>
@@ -26,7 +26,6 @@ import { getMovie } from 'api'
 import uploading from '_m/uploading'
 import tabs from '_m/tabs'
 import movieDetail from '_c/MovieDetail'
-import { mapMutations, mapState } from 'vuex'
 export default {
     mixins: [uploading, tabs],
     components: {
@@ -69,23 +68,7 @@ export default {
             const { classifyid } = this.tabs[this.currentTab]
             this.params.classifyid = classifyid
             await this.comGetData(getMovie)
-        },
-        init () {
-            if (this.page_status) this.tabs = this.page_status
-            // this.getData()
-        },
-        ...mapMutations(['SET_MOVIE_DATA'])
-    },
-    created () {
-        this.init()
-    },
-    destroyed () {
-        this.SET_MOVIE_DATA(this.tabs)
-    },
-    computed: {
-        ...mapState({
-            page_status: state => state.pageStatus.movie_page
-        })
+        }
     }
 }
 </script>
@@ -98,6 +81,5 @@ export default {
 }
 .movie_detail {
     background-color: #fff;
-    padding: 20px 0;
 }
 </style>

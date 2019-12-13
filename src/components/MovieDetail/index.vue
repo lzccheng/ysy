@@ -4,10 +4,10 @@
             <video v-if="detail" id="id_video" class="video-js vjs-default-skin">
             </video>
         </div>
-        <p class="title">
+        <!-- <p class="title">
             <span>{{detail.title}}</span><br />
             <span class="time">{{detail.updatetime}}<EyeLook :look="detail.reads"/></span>
-        </p>
+        </p> -->
     </div>
 </template>
 <script>
@@ -38,15 +38,15 @@ export default {
                     this.player.src({
                         src: detail.playurl
                     })
-                    this.player.on('play', () => {
-                        const isFullscreen = this.player.isFullscreen()
-                        if (!isFullscreen) {
-                            this.player.requestFullscreen()
-                        }
-                    })
-                    this.player.on('ended', () => {
-                        this.player.exitFullScreen()
-                    })
+                    // this.player.on('play', () => {
+                    //     const isFullscreen = this.player.isFullscreen()
+                    //     if (!isFullscreen) {
+                    //         this.player.requestFullscreen()
+                    //     }
+                    // })
+                    // this.player.on('ended', () => {
+                    //     this.player.exitFullScreen()
+                    // })
                 })
             })
         }
@@ -62,7 +62,7 @@ export default {
 <style lang="scss" scoped>
 .video-js {
     width: 100% !important;
-    height: 400px !important;
+    height: 660px !important;
 }
 .title {
     margin: 10px 6px;

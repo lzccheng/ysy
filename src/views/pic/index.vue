@@ -26,7 +26,6 @@ import { getPic, getPicAlone } from 'api'
 import uploading from '_m/uploading'
 import tabs from '_m/tabs'
 import { ImagePreview } from 'vant'
-import { mapMutations, mapState } from 'vuex'
 export default {
     mixins: [uploading, tabs],
     data () {
@@ -62,22 +61,7 @@ export default {
             const { classify } = this.tabs[this.currentTab]
             this.params.classify = classify
             await this.comGetData(getPic)
-        },
-        init () {
-            if (this.page_status) this.tabs = this.page_status
-        },
-        ...mapMutations(['SET_PIC_DATA'])
-    },
-    computed: {
-        ...mapState({
-            page_status: state => state.pageStatus.pic_page
-        })
-    },
-    created () {
-        this.init()
-    },
-    destroyed () {
-        this.SET_PIC_DATA(this.tabs)
+        }
     }
 }
 </script>

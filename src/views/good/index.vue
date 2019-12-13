@@ -8,7 +8,7 @@
                 </div>
             </van-tab>
         </TabsUpload>
-        <FixedBg :show="bgShow" @close="bgShow = false">
+        <FixedBg :show="bgShow" :closeType="currentTab ? 'top' : 'bottom'" @close="bgShow = false">
             <div class="movie_detail" v-if="currentTab === 0">
                 <movieDetail :data="currentMovie"/>
             </div>
@@ -25,7 +25,6 @@ import uploading from '_m/uploading'
 import tabs from '_m/tabs'
 import movieDetail from '_c/MovieDetail'
 import { getGood, getPicAlone } from 'api'
-import { mapMutations, mapState } from 'vuex'
 import { ImagePreview } from 'vant'
 
 export default {
@@ -74,22 +73,7 @@ export default {
             const { type } = this.tabs[this.currentTab]
             this.params.type = type
             await this.comGetData(getGood)
-        },
-        init () {
-            if (this.page_status) this.tabs = this.page_status
-        },
-        ...mapMutations(['SET_GOOD_DATA'])
-    },
-    created () {
-        this.init()
-    },
-    computed: {
-        ...mapState({
-            page_status: state => state.pageStatus.good_page
-        })
-    },
-    destroyed () {
-        this.SET_GOOD_DATA(this.tabs)
+        }
     }
 }
 </script>
@@ -102,7 +86,6 @@ export default {
 }
 .movie_detail {
     background-color: #fff;
-    padding: 20px 0;
 }
 .imglist {
     background-color: #fff;

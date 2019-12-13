@@ -26,7 +26,6 @@
 import { getNavel, getNavelAlone } from 'api'
 import uploading from '_m/uploading'
 import tabs from '_m/tabs'
-import { mapMutations, mapState } from 'vuex'
 export default {
     mixins: [uploading, tabs],
     data () {
@@ -61,21 +60,11 @@ export default {
             await this.comGetData(getNavel)
         },
         init () {
-            if (this.page_status) this.tabs = this.page_status
             // this.getData()
-        },
-        ...mapMutations(['SET_NAVEL_DATA'])
+        }
     },
     created () {
         this.init()
-    },
-    computed: {
-        ...mapState({
-            page_status: state => state.pageStatus.navel_page
-        })
-    },
-    destroyed () {
-        this.SET_NAVEL_DATA(this.tabs)
     }
 }
 </script>
