@@ -4,7 +4,7 @@ import { Toast } from 'vant'
 const { commit } = store
 
 const instance = axios.create({
-    baseURL: process.env.NODE_ENV === `"development"` ? `http://localhost:7001/h5api/` : `http://103.140.228.151/h5api/`,
+    baseURL: process.env.NODE_ENV === `development` ? `http://localhost:7001/h5api/` : `http://103.140.228.151/h5api/`,
     timeout: 5000
 })
 
