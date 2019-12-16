@@ -4,7 +4,7 @@ import { Toast } from 'vant'
 const { commit } = store
 
 const instance = axios.create({
-    baseURL: `https://saohu19.com/`,
+    baseURL: process.env.NODE_ENV === `"development"` ? `http://localhost:7001/h5api/` : `http://103.140.228.151/h5api/`,
     timeout: 5000
 })
 
@@ -16,7 +16,7 @@ instance.interceptors.response.use(res => {
     Toast(data.message)
     return Promise.reject(data)
 }, err => {
-    Toast('网络出错')
+    Toast(err.message)
     return err
 })
 
@@ -32,8 +32,15 @@ const request = method => {
             if (needLoading) {
                 commit('SET_AJAXLOADING', true)
             }
+            if (opt.params) {
+                opt.params._url = url
+            } else {
+                opt.params = {
+                    _url: url
+                }
+            }
         }
-        return instance({ ..._opt, ...opt, url }).finally(() => commit('SET_AJAXLOADING', false))
+        return instance({ ..._opt, ...opt }).finally(() => commit('SET_AJAXLOADING', false))
     }
 }
 
